@@ -1,1 +1,0 @@
-esse repositorio sera utilizado apenas para teste e para treinamento de git/github
