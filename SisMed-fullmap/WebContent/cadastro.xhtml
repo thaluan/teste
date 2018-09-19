@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>SisMed</title>
+	<link rel="icon" href="img/icone-logo.ico" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<b:navBar brand=" SisMed" brand-img="img/logo.gif" brandHref="#">
+
+	</b:navBar>
+
+
+</h:head>
+
+
+<h:body>
+
+
+	<h:form id="formCadastro">
+
+		<b:container>
+
+			<b:panel title="Cadastro de usuário" collapsible="false" look="info"
+				style="text-align:center; font-weight: bold">
+				
+				
+				<!-- 
+    	        retirei o required true desse atributo para poder usar p botao cancelar 
+                -->
+
+				<b:inputText placeholder="Login"  labelColMd="2"
+					value="#{usuarioMB.nome}">
+					<f:facet name="prepend">
+						<b:icon name="user" />
+					</f:facet>
+				</b:inputText>
+
+				<b:inputText placeholder="Email" labelColMd="2"
+					value="#{usuarioMB.email}">
+					<f:facet name="prepend">
+						<b:iconAwesome name="envelope" />
+					</f:facet>
+				</b:inputText>
+
+				<b:inputText placeholder="Senha" labelColMd="2"
+					value="#{usuarioMB.senha}">
+					<f:facet name="prepend">
+						<b:iconAwesome name="key" />
+					</f:facet>
+				</b:inputText>
+
+				<div class="center">
+					<b:commandButton style="margin-left:15px" value="Cancelar"
+						look="danger" action="#{usuarioMB.voltarPrincipal}" />
+					
+					<span style="margin-left: 15px"></span>
+					
+					<b:commandButton style="margin-right:15px" value="Salvar"
+						look="success" action="#{usuarioMB.realizarCadastro}" />
+
+				</div>
+			</b:panel>
+
+		</b:container>
+
+	</h:form>
+	
+
+
+</h:body>
+</html>

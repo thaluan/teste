@@ -1,0 +1,190 @@
+@CHARSET "UTF-8";
+
+/*Font-Size links*/
+.ui-widget .ui-widget {
+    font-size: 1.5em;
+}
+
+/*SideMenu links*/
+.ui-widget-content a {
+    color: #8bc7cb;
+    text-decoration:none; 
+}
+
+/*SideMenu - Tabela */
+.ui-panelgrid .ui-panelgrid-cell {
+    border-width: 1px;
+    border-style: none;
+    border-color: inherit;
+    padding: 13px 35px;
+    font-size: 2rem;
+}
+
+/*SideMenu*/
+.ui-widget-content {
+    border: none;
+    background: #17a2b8;
+    color: #8bc7cb !important;
+}
+
+/*
+#button-float{
+    margin: 10px;
+    z-index: 0;
+    position: absolute;
+    cursor: pointer;
+    left: 0px;
+    top: 0px;
+}
+
+.div_teste{
+width:200px;
+height:100px;
+background:#f00;
+position:absolute;
+z-index:100;
+top:30%;
+left:40;
+}
+*/
+/*
+#img-cesta {
+    width: 100px;
+    height: 100px;
+    margin-top: -5px;
+}
+
+.ui-stack {
+    position: absolute;
+    bottom: 28px;
+    right: 40px;
+    margin-right: 60%;
+    margin-top: 5%;
+    margin-bottom: 21%;
+    margin-left: 36%;
+}
+*/
+
+#formAvaliacao{
+	margin-top: 30px;
+}
+
+#formCadastro{
+	margin-top: 30px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.panel-default {
+    border-color: transparent;
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+    font-size: 68px !important;
+}
+
+/* background main saude-publica */
+.bg-imgMain{
+	position: absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:0;
+	opacity: 0.4;
+}
+
+.titulo{
+	font-size: 3rem;
+}
+
+.navbar-default {
+	background-color: #17a2b8;
+	font-size: 1.5rem;
+}	
+
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+}
+
+/* background links navbar */
+.navbar-default .navbar-nav > li > a {
+    color: #8bc7cb;
+}
+
+/* color links navbar */
+.navbar-default .navbar-nav > li > a:hover {
+    color: #fff;
+}
+
+/* color link navbar-brand */
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+/* color link navbar-brand */
+.navbar-default .navbar-brand:hover {
+    color: #8bc7cb;
+}
+
+/* img logo navbar-brand */
+img{
+	width: 30px;
+	height: 30px;
+	margin-top: -5px;
+}
+
+.input-text{
+	vertical-align: middle;
+}
+
+/* alinhamento de textos */
+
+.center{
+	text-align: center;
+}
+.left{
+	text-align: left;
+}
+.right{
+	text-align: right;
+}
+
+/*icone Buscar*/
+
+.spanBtnBuscar{
+	background-color: transparent;
+	padding: 0;
+	border: none;
+}
+
+
+.btnBuscar{
+	color: gray;
+	border: none;
+	background-color: transparent;
+}
+
+
+.ui-growl{
+	text-align: center;
+}
+
+.imgLogin{
+	width: 100px;
+	height: 100px;
+}
+.linkFooter{
+	color: #ffffff;
+	padding-right:30px;
+	font-size: 20px;
+}

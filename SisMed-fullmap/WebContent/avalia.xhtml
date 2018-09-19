@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>SisMed</title>
+	<link rel="icon" href="img/icone-logo.ico" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<b:navBar brand=" SisMed" brand-img="img/logo.gif" brandHref="#">
+
+	</b:navBar>
+
+
+</h:head>
+
+
+
+<h:body>
+
+
+	<h:form id="formAvaliacao">
+
+		<b:container>
+
+			<b:panel title="Avaliação de especialidade" collapsible="false"
+				look="info" style="text-align:center; font-weight: bold">
+
+				<p>O que voce achou do atendimento?</p>
+				<b:panelGrid columns="1">
+
+
+					<b:radiobutton value="#{avaliaespecialidadeMB.comentario}">
+						<f:selectItem itemValue="bom" itemLabel="bom" />
+						<f:selectItem itemValue="ruim" itemLabel="ruim" />
+						<f:selectItem itemValue="med" itemLabel="med" />
+					</b:radiobutton>
+
+
+
+				</b:panelGrid>
+				<br />
+  De uma nota para o atendimento?	
+  <br />
+				<br />
+				<p:rating value="#{avaliaespecialidadeMB.nota}" required="true"></p:rating>
+				<div class="center">
+					<br />
+					<b:commandButton style="margin-left:15px" value="Cancelar"
+						look="danger" action="#{usuarioMB.voltarPrincipal}" />
+
+					<span style="margin-left: 15px"></span>
+
+					<b:commandButton style="margin-right:15px" value="Avaliar"
+						onclick="alert('Especialidade Avaliada');" look="success"
+						action="#{avaliaespecialidadeMB.incluirAvaliaEspecialidade(usuarioMB.especialidade,especialidadeMB,usuarioMB.usuario)}" />
+
+				</div>
+
+
+
+
+			</b:panel>
+
+		</b:container>
+
+	</h:form>
+
+
+	<h:form id="PanelModal-Avaliar" ajax="false" class="center">
+
+		<b:modal id="amodal6" styleClass="modalPseudoClass6 modal-md"
+			closable="true" close-on-escape="true" backdrop="false">
+
+			<b:image library="img" value="img/icone-logo.ico" class="imgLogin" />
+			<br />
+
+
+
+
+
+			<b:panelGrid size="xs" columns="1">
+				<p>O que voce achou do atendimento?</p>
+				<b:radiobutton value="#{avaliaespecialidadeMB.comentario}"
+					itemLabel="bom" itemValue="6" required="bom" />
+				<b:radiobutton value="#{avaliaespecialidadeMB.comentario}"
+					itemLabel="muito bom" itemValue="muito bom" />
+				<b:radiobutton value="#{avaliaespecialidadeMB.comentario}"
+					itemLabel="mediano" itemValue="mediano" />
+				<b:radiobutton value="#{avaliaespecialidadeMB.comentario}"
+					itemLabel="ruim" itemValue="ruim" />
+				<p></p>
+				<p>De uma nota para o atendimento?</p>
+				<p:rating value="#{avaliaespecialidadeMB.nota}" required="true"></p:rating>
+			</b:panelGrid>
+			<b:commandButton value="Avaliar"
+				action="#{avaliaespecialidadeMB.incluirAvaliaEspecialidade(usuarioMB.especialidade)}"
+				class="btn btn-lg btn-primary btn-block mb-2" type="submit" />
+
+
+
+
+			<br />
+			<p class="mt-5 mb-3 text-muted">@ 2018 - All rights reserved</p>
+
+		</b:modal>
+
+	</h:form>
+
+
+
+
+
+
+
+
+	<h:form id="PanelModal-InfoSocial">
+		<b:modal id="amodal3" title="Info-Social"
+			styleClass="modalPseudoClass3" closable="true" close-on-escape="true"
+			backdrop="false">
+
+			<b:panel title="Nome: João da silva" collapsible="false">
+				<h:outputText
+					value=" Unidade de saúde: UPA de Duque de Caxias
+ 						Bairro: Duque de Caxias Unidade funcionando só emergência. 
+ 						Encaminhando pacientes para o hospital geral de Duque de Caxias" />
+			</b:panel>
+
+			<b:panel title="Nome: João da silva" collapsible="false">
+				<h:outputText
+					value=" Unidade de saúde: UPA de Duque de Caxias
+ 						Bairro: Duque de Caxias Unidade funcionando só emergência. 
+ 						Encaminhando pacientes para o hospital geral de Duque de Caxias" />
+			</b:panel>
+			<f:facet name="footer">
+				<b:button value="Fechar" look="danger" dismiss="modal" />
+			</f:facet>
+		</b:modal>
+	</h:form>
+
+	<h:form id="PanelModal-Ajuda">
+		<b:modal id="amodal2" title="#{msgs.navAjuda}"
+			styleClass="modalPseudoClass2" closable="true" close-on-escape="true"
+			backdrop="false">
+
+			<b:listLinks>
+
+				<b:navLink href="http://getbootstrap.com/components/#navbar"
+					value="#{msgs.linkSiglas}" icon-awesome="fa-question-circle"></b:navLink>
+				<b:navLink></b:navLink>
+
+				<b:navLink href="http://getbootstrap.com/components/#navbar"
+					value="#{msgs.linkTermos}" icon-awesome="fa-book"></b:navLink>
+				<b:navLink></b:navLink>
+
+				<b:navLink href="http://getbootstrap.com/components/#navbar"
+					value="#{msgs.linkReportar}" icon-awesome="fa-exclamation-triangle"></b:navLink>
+				<b:navLink></b:navLink>
+
+			</b:listLinks>
+
+			<f:facet name="footer">
+				<b:button value="#{msgs.btnFechar}" look="danger" dismiss="modal" />
+			</f:facet>
+		</b:modal>
+	</h:form>
+
+	<h:form id="PanelModal-Entrar" ajax="false" class="center">
+
+		<b:modal id="amodal2" styleClass="modalPseudoClass4 modal-md"
+			closable="true" close-on-escape="true" backdrop="false">
+
+			<b:image library="img" value="img/icone-logo.ico" class="imgLogin" />
+			<br />
+			<b:inputText placeholder="Login" labelColMd="2"
+				value="#{usuarioMB.nome}">
+				<f:facet name="prepend">
+					<b:icon name="envelope" />
+				</f:facet>
+			</b:inputText>
+
+			<b:inputText placeholder="Senha" labelColMd="2"
+				value="#{usuarioMB.senha}">
+				<f:facet name="prepend">
+					<b:iconAwesome name="key" />
+				</f:facet>
+			</b:inputText>
+
+			<b:commandButton value="Entrar" action="#{usuarioMB.acaoAutenticar}"
+				class="btn btn-lg btn-primary btn-block mb-2" type="submit" />
+
+
+			<div class="checkbox mb-2">
+				<h:form id="opcoes">
+					<b:link href="#" value="Esqueci a Senha" />
+					<span style="margin-left: 30px" />
+					<b:link href="cadastro.xhtml" value="Realizar cadastro" />
+
+				</h:form>
+			</div>
+
+
+			<p class="mt-5 mb-3 text-muted">@ 2018 - All rights reserved</p>
+
+		</b:modal>
+
+	</h:form>
+
+
+	<h:form id="PanelModal-Sair" action="#{usuarioMB.voltarPrincipal}"
+		ajax="false" class="center">
+
+		<b:modal id="amodal3" styleClass="modalPseudoClass5 modal-md"
+			closable="true" close-on-escape="true" backdrop="false">
+
+			<b:image library="img" value="img/icone-logo.ico" class="imgLogin" />
+			<br />
+
+			<b:commandButton value="Sair" action="#{usuarioMB.acaoLogout}"
+				class="btn btn-lg btn-danger btn-block mb-2" type="submit" />
+			<br />
+			<p class="mt-5 mb-3 text-muted">@ 2018 - All rights reserved</p>
+
+		</b:modal>
+	</h:form>
+
+	<h:form>
+
+	</h:form>
+</h:body>
+</html>

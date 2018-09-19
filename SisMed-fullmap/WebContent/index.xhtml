@@ -1,0 +1,450 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+
+
+	<script type = "text/javascript">
+		
+         function showLocation(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            setMapCenter(position.coords.latitude, position.coords.longitude);
+         }
+         
+         function setMapCenter(latitude, longitude) {
+        	 PF('w_gmap').getMap().setCenter(new google.maps.LatLng(latitude,longitude));
+        	 
+        	 
+        	
+        	 
+    
+        	 
+    
+        	
+        	 
+        	 
+         }
+
+         function errorHandler(err) {
+            if(err.code == 1) {
+               alert("Error: Access is denied!");
+               
+               PF('w_gmap').getMap().setCenter(new google.maps.LatLng(-22.6433502,-43.4457766));
+               
+               
+               window.load();
+            } else if( err.code == 2) {
+               alert("Error: Position is unavailable!");
+            }
+         }
+			
+         function getLocation() {
+
+            if(navigator.geolocation) {
+               
+               // timeout at 60000 milliseconds (60 seconds)
+               var options = {timeout:60000};
+               navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+            } else {
+               alert("Sorry, browser does not support geolocation!");
+            }
+         }
+      </script>
+
+	<script
+		src="https://maps.google.com/maps/api/js?key=AIzaSyCBAaHQsMaNUKHr05PXmKkqUT0bMFu2Lqs"
+		type="text/javascript"></script>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>SisMed</title>
+	<link rel="icon" href="img/icone-logo.ico" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+
+	<!-- 
+	<b:navBar brand=" SisMed" brand-img="img/logo.gif"
+		brandHref="index.xhtml">
+
+	</b:navBar>
+	-->
+
+
+
+
+
+
+</h:head>
+
+
+<h:body onload="getLocation();">
+
+	<p:commandButton icon="fa fa-reorder"
+		oncomplete="PF('sidebar1').show()" />
+
+	<!-- 
+	<div id="button-float">
+
+		
+	</div>
+	
+	
+	<h:form>
+		<p:stack id="stack" icon="img/stack.png" expanded="true"
+			style="width: 100px">
+			<p:menuitem value="Home" icon="img/home.png" action="home" />
+			<p:menuitem value="Mapa" icon="img/email.png" action="map1" />
+			<p:menuitem value="Statistics" icon="img/video.png" url="#" />
+			<p:menuitem value="Report Bug" icon="img/music.png" url="#" />
+			<p:menuitem value="Contact Form" icon="img/home.png" url="#" />
+		</p:stack>
+	</h:form>
+	-->
+
+
+	<p:sidebar widgetVar="sidebar1" baseZIndex="10000"
+		style="text-align:center">
+		
+		<b:image value="img/logo.gif" style="width: 100px; height: 100px; margin-top: 30px; margin-left: 25px;"/>
+		
+		<h1 style="font-weight: normal">SisMed</h1>
+		<br/>
+		<b:form class="navbar-form centered" role="search" style="text-align: center">
+
+			<div class="form-group" style="text-align: inherit;">
+				<b:inputText id="x" class="form-control center"
+					style="border-radius: 20px;" value="#{especialidadeMB.nome}"
+					placeholder="Especialidade médica"
+					onkeyup="ajax:inputTextBean.capitalizeText()" update="@next">
+
+					<f:facet name="append">
+						<b:commandButton icon-awesome="fa-search fa-2x"
+							style="background:transparent; color: #60bfc9; margin-top: -4px; border:0"
+							action="#{especialidadeMB.buscarEspecialidade}" ajax="true">
+
+							<p:ajax execute="x" render="tabela" update="@([id$=meubody])" />
+
+						</b:commandButton>
+
+					</f:facet>
+				</b:inputText>
+
+			</div>
+
+			<p:panelGrid columns="1">
+				<br/>
+				<p:commandLink  styleClass= "fa fa-users"
+					oncomplete="PF('sidebar1').hide()" value=" #{msgs.navInfoSocial}"
+					onclick="$('.modalPseudoClass3').modal()"/>
+					 
+				<p:commandLink styleClass="fa fa-question"
+					oncomplete="PF('sidebar1').hide()" value=" #{msgs.navAjuda}"
+					onclick="$('.modalPseudoClass2').modal()" />
+				
+				<p:commandLink styleClass="fa fa-key"
+				oncomplete="PF('sidebar1').hide()" value=" #{msgs.navLogin}" 
+				onclick="$('.modalPseudoClass4').modal()" />
+				
+				<p:commandLink styleClass="fa fa-user-circle" rendered="#{usuarioMB.logado}"
+					oncomplete="PF('sidebar1').hide()" value=" #{usuarioMB.nome}"
+					onclick="$('.modalPseudoClass5').modal()" style="color: #fff"/>
+				
+				
+			</p:panelGrid>
+			
+		</b:form>
+
+		<div class="form-group">
+			<h:form>
+
+				<!-- 
+				<b:link value="#{msgs.navInfoSocial}" href="#" class="linkFooter"
+					icon-awesome="fa-users fa"
+					onclick="$('.modalPseudoClass3').modal()" />
+
+				<b:link value="#{msgs.navAjuda}" href="#" class="linkFooter"
+					icon-awesome="fa-question fa"
+					onclick="$('.modalPseudoClass2').modal()" />
+
+				<b:link value="#{msgs.navLogin}" href="#" class="linkFooter"
+					rendered="#{usuarioMB.logado==false}" icon-awesome="fa-key fa"
+					onclick="$('.modalPseudoClass4').modal()" />
+
+				<b:link value="#{usuarioMB.nome}" href="#" class="linkFooter"
+					icon-awesome="fa-user-circle fa" rendered="#{usuarioMB.logado}"
+					onclick="$('.modalPseudoClass5').modal()" style="color: #fff"
+					oncomplete="PF('sidebar1').hide()" />
+				 -->
+
+
+			</h:form>
+		</div>
+	</p:sidebar>
+
+
+
+	<h:form id="meubody">
+
+
+		<p:gmap center="0,0" zoom="15" type="MAP"
+			style="width:100%;height:800px" model="#{addMarkersView.emptyModel}"
+			rendered="#{!especialidadeMB.showtable}" widgetVar="w_gmap" disableDefaultUI="true" />
+
+
+
+		<h:panelGroup id="panel">
+
+
+			<b:column>
+
+				<b:row>
+
+					<p:dataTable id="tabela" value="#{especialidadeMB.lista}"
+						var="especialidade" class="center" responsive="true"
+						rendered="#{especialidadeMB.showtable}" ajax="true" reflow="true">
+
+						<p:column class="center">
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{especialidade.nome}"></h:outputText>
+						</p:column>
+						<p:column class="center">
+							<f:facet name="header">Disponibilidade</f:facet>
+							<h:outputText value="#{especialidade.disponibilidade}"></h:outputText>
+						</p:column>
+
+						<p:column class="center">
+							<f:facet name="header">Unidade</f:facet>
+							<h:outputText value="#{especialidade.unidade.nome}"></h:outputText>
+						</p:column>
+
+						<p:column class="center">
+							<f:facet name="header">Avaliação</f:facet>
+
+							<p:growl id="messages" showDetail="true" />
+
+							<b:panelGrid columns="1" cellpadding="5">
+
+								<p:rating value="#{especialidade.avaliacaoint()}"
+									readonly="true">
+
+
+								</p:rating>
+
+								<b:commandButton
+									action="#{usuarioMB.acaoPagAvalia(especialidade)}"
+									value="Avaliar" rendered="#{usuarioMB.logado}" />
+
+
+							</b:panelGrid>
+
+
+						</p:column>
+
+
+
+						<p:rowExpansion>
+							<p:panelGrid columns="2" style="width:300px">
+								<f:facet name="header">
+
+								</f:facet>
+
+								<h:outputText value="Id:" />
+
+								<h:outputText value="Year" />
+
+
+								<h:outputText value="Color:" />
+
+
+								<h:outputText value="Price" />
+
+							</p:panelGrid>
+						</p:rowExpansion>
+
+
+					</p:dataTable>
+
+
+
+					<br />
+				</b:row>
+			</b:column>
+
+		</h:panelGroup>
+
+
+	</h:form>
+
+	<h:form id="PanelModal-Avaliar" ajax="false" class="center">
+
+		<b:modal id="amodal6" styleClass="modalPseudoClass6 modal-md"
+			closable="true" close-on-escape="true" backdrop="false">
+
+			<b:image library="img" value="img/icone-logo.ico" class="imgLogin" />
+			<br />
+
+
+			<b:panelGrid size="xs" columns="1">
+				<p>O que voce achou do atendimento?</p>
+				<b:radiobutton value="#{avaliaespecialidadeMB.comentario}"
+					itemLabel="bom" itemValue="6" required="bom" />
+				<b:radiobutton value="#{avaliaespecialidadeMB.comentario}"
+					itemLabel="muito bom" itemValue="muito bom" />
+				<b:radiobutton value="#{avaliaespecialidadeMB.comentario}"
+					itemLabel="mediano" itemValue="mediano" />
+				<b:radiobutton value="#{avaliaespecialidadeMB.comentario}"
+					itemLabel="ruim" itemValue="ruim" />
+				<p></p>
+				<p>De uma nota para o atendimento?</p>
+				<p:rating value="#{avaliaespecialidadeMB.nota}" required="true"></p:rating>
+			</b:panelGrid>
+			<b:commandButton value="Avaliar"
+				action="#{avaliaespecialidadeMB.incluirAvaliaEspecialidade(usuarioMB.especialidade)}"
+				class="btn btn-lg btn-primary btn-block mb-2" type="submit" />
+
+
+			<br />
+			<p class="mt-5 mb-3 text-muted">@ 2018 - All rights reserved</p>
+
+		</b:modal>
+
+	</h:form>
+
+
+	<h:form id="PanelModal-InfoSocial">
+		<b:modal id="amodal2" title="Info-Social"
+			styleClass="modalPseudoClass3" closable="true" close-on-escape="true"
+			backdrop="false">
+
+			<b:panel title="João da silva" collapsible="false">
+
+				<h:outputText
+					value=" Unidade de saúde: UPA de Duque de Caxias
+ 						Bairro: Duque de Caxias Unidade funcionando só emergência. 
+ 						Encaminhando pacientes para o hospital geral de Duque de Caxias" />
+			</b:panel>
+
+			<b:panel title="Nome: João da silva" collapsible="false">
+				<h:outputText
+					value=" Unidade de saúde: UPA de Duque de Caxias
+ 						Bairro: Duque de Caxias Unidade funcionando só emergência. 
+ 						Encaminhando pacientes para o hospital geral de Duque de Caxias" />
+			</b:panel>
+			<f:facet name="footer">
+				<b:button value="Fechar" look="danger" dismiss="modal" />
+			</f:facet>
+		</b:modal>
+	</h:form>
+
+
+	<h:form id="PanelModal-Ajuda">
+
+		<b:modal id="amodal2" title="#{msgs.navAjuda}"
+			styleClass="modalPseudoClass2" closable="true" close-on-escape="true"
+			backdrop="false">
+			<br />
+
+
+			<b:listLinks>
+
+				<b:navLink href="#" style="font-size:20px"
+					value="#{msgs.linkSiglas}" icon-awesome="fa-question-circle"></b:navLink>
+				<b:navLink></b:navLink>
+
+				<b:navLink href="#" style="font-size:20px"
+					value="#{msgs.linkTermos}" icon-awesome="fa-book"></b:navLink>
+				<b:navLink></b:navLink>
+
+				<b:navLink href="#" style="font-size:20px"
+					value="#{msgs.linkReportar}" icon-awesome="fa-exclamation-triangle"></b:navLink>
+				<b:navLink></b:navLink>
+
+			</b:listLinks>
+
+			<f:facet name="footer">
+				<b:button value="#{msgs.btnFechar}" look="danger" dismiss="modal" />
+			</f:facet>
+		</b:modal>
+	</h:form>
+
+	<h:form id="PanelModal-Entrar" ajax="false" class="center">
+
+		<b:modal id="amodal2" styleClass="modalPseudoClass4 modal-md"
+			closable="true" close-on-escape="true" backdrop="false">
+
+			<b:image library="img" value="img/icone-logo.ico" class="imgLogin" />
+			<br />
+			<b:inputText placeholder="Login" labelColMd="2"
+				value="#{usuarioMB.nome}">
+				<f:facet name="prepend">
+					<b:icon name="envelope" />
+				</f:facet>
+			</b:inputText>
+
+			<b:inputText placeholder="Senha" labelColMd="2"
+				value="#{usuarioMB.senha}">
+				<f:facet name="prepend">
+					<b:iconAwesome name="key" />
+				</f:facet>
+			</b:inputText>
+
+			<b:commandButton value="Entrar" action="#{usuarioMB.acaoAutenticar}"
+				class="btn btn-lg btn-primary btn-block mb-2" type="submit" />
+
+
+
+
+			<div class="checkbox mb-2">
+				<h:form id="opcoes">
+					<b:link href="#" value="Esqueci a senha" />
+					<span style="margin-left: 30px" />
+					<b:link href="cadastro.xhtml" value="Realizar cadastro" />
+
+				</h:form>
+			</div>
+
+
+			<p class="mt-5 mb-3 text-muted">@ 2018 - All rights reserved</p>
+
+		</b:modal>
+
+	</h:form>
+
+
+	<h:form id="PanelModal-Sair" action="#{usuarioMB.voltarPrincipal}"
+		ajax="false" class="center">
+
+		<b:modal id="amodal3" styleClass="modalPseudoClass5 modal-md"
+			closable="true" close-on-escape="true" backdrop="false">
+
+
+
+			<b:commandButton value="Sair" action="#{usuarioMB.acaoLogout}"
+				class="btn btn-lg btn-danger btn-block mb-2" type="submit" />
+			<br />
+
+		</b:modal>
+	</h:form>
+
+	<h:form id="PanelModal-LoginNegado"
+		action="#{usuarioMB.voltarPrincipal}" ajax="false" class="center">
+
+		<b:modal id="amodalLoginNegado"
+			styleClass="modalPseudoClasslLoginNegado modal-md" closable="true"
+			close-on-escape="true" backdrop="false">
+
+			<b:image library="img" value="img/icone-logo.ico" class="imgLogin" />
+			<br />
+
+			<p style="color: red;">Login nao pode ser efetuado</p>
+			<br />
+			<p class="mt-5 mb-3 text-muted">@ 2018 - All rights reserved</p>
+
+		</b:modal>
+	</h:form>
+
+
+</h:body>
+</html>
