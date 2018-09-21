@@ -5,7 +5,7 @@
 
 	import java.io.Serializable;
 	import java.util.ArrayList;
-	import java.util.Iterator;
+	//import java.util.Iterator;
 	import java.util.List;
 
 	import javax.annotation.PostConstruct;
@@ -18,7 +18,7 @@
 	import org.primefaces.model.map.MapModel;
 	import org.primefaces.model.map.Marker;
 
-	import model.Especialidade;
+	//import model.Especialidade;
 	import model.UnidadeSaude;
 	import model.dao.UnidadeSaudeDAO;
 	 

@@ -53,6 +53,7 @@ public class UsuarioMB implements Serializable {
 
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void acaoAutenticar() {
 
 		lista = dao.lerTodos();
